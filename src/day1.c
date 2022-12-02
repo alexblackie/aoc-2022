@@ -12,10 +12,16 @@ struct Food {
 	struct Food *next;
 };
 
+int comparator(const void *a, const void *b)
+{
+	return *(long int*)b - *(long int*)a;
+}
+
 int main()
 {
 	char *line_buf = NULL;
 	size_t line_bufsize = 0;
+	int elf_count = 0;
 
 	struct Elf *last_elf = NULL;
 	struct Food *last_food = NULL;
@@ -33,6 +39,7 @@ int main()
 			e->food = last_food;
 			last_elf = e;
 			last_food = NULL;
+			elf_count++;
 			continue;
 		}
 
@@ -42,24 +49,28 @@ int main()
 		last_food = food;
 	}
 
-	long int largest = 0;
+	long int calorie_sums[elf_count];
 	struct Elf *elf_ptr = last_elf;
+	int elf_i = 0;
 	while(elf_ptr != NULL)
 	{
-		int calorie_sum = 0;
-		struct Food *food_ptr = elf_ptr->food;
+		long int sum = 0;
 
+		struct Food *food_ptr = elf_ptr->food;
 		while(food_ptr != NULL)
 		{
-			calorie_sum += food_ptr->calories;
+			sum += food_ptr->calories;
 			food_ptr = food_ptr->next;
 		}
 
-		if (calorie_sum > largest)
-			largest = calorie_sum;
-
+		calorie_sums[elf_i] = sum;
+		elf_i++;
 		elf_ptr = elf_ptr->next;
 	}
+
+	qsort(calorie_sums, elf_count, sizeof(long int), comparator);
+	printf("Day 1-1: %d\n", calorie_sums[0]);
+	printf("Day 1-2: %d\n", calorie_sums[0] + calorie_sums[1] + calorie_sums[2]);
 
 	while(last_elf != NULL)
 	{
