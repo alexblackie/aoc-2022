@@ -19,7 +19,9 @@ int main()
 	 * Day 2
 	 */
 	int day2_result = 0;
-	if (day2(&day2_result) == -1)
+	int day2_result2 = 0;
+	if (day2(&day2_result, &day2_result2) == -1)
 		return EXIT_FAILURE;
 	printf("Day 2-1: %d\n", day2_result);
+	printf("Day 2-2: %d\n", day2_result2);
 }
