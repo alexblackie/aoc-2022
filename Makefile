@@ -1,4 +1,4 @@
-all: build/day1
+all: build/day1 build/day2
 
 build:
 	@mkdir build
