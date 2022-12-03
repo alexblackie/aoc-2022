@@ -1,5 +1,7 @@
 # Advent of Code 2k22: My Solutions
 
+[![Test Suite](https://github.com/alexblackie/aoc-2022/actions/workflows/test.yaml/badge.svg)](https://github.com/alexblackie/aoc-2022/actions/workflows/test.yaml)
+
 This repository contains my personal solutions for the [Advent of Code for 2022][aoc].
 
 [aoc]: https://adventofcode.com/2022
