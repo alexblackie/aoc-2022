@@ -21,5 +21,5 @@ int main()
 	int day2_result = 0;
 	if(day2(&day2_result) == -1)
 		return(EXIT_FAILURE);
-	printf("Day 2-1: %ld\n", day2_result);
+	printf("Day 2-1: %d\n", day2_result);
 }
