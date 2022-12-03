@@ -24,6 +24,8 @@ TEST test_rps_calculate_win()
 	us = PAPER;
 	them = PAPER;
 	ASSERT_EQ(POINTS_DRAW, rps_calculate_win(us, them));
+
+	PASS();
 }
 
 SUITE(day2_suite)
