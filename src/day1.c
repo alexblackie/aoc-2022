@@ -1,6 +1,4 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
+#include "day1.h"
 
 struct Elf {
 	struct Elf *next;
@@ -12,12 +10,15 @@ struct Food {
 	struct Food *next;
 };
 
-int comparator(const void *a, const void *b)
+/**
+ * Comparator function for `qsort` to sort integers in descending order.
+ */
+int comparator_desc(const void *a, const void *b)
 {
 	return *(long int*)b - *(long int*)a;
 }
 
-int main()
+int day1(long int result[])
 {
 	char *line_buf = NULL;
 	size_t line_bufsize = 0;
@@ -28,7 +29,7 @@ int main()
 
 	FILE *fp = fopen("inputs/day1.txt", "r");
 	if (fp == NULL)
-		return(EXIT_FAILURE);
+		return(-1);
 
 	while(getline(&line_buf, &line_bufsize, fp) != -1)
 	{
@@ -68,10 +69,6 @@ int main()
 		elf_ptr = elf_ptr->next;
 	}
 
-	qsort(calorie_sums, elf_count, sizeof(long int), comparator);
-	printf("Day 1-1: %d\n", calorie_sums[0]);
-	printf("Day 1-2: %d\n", calorie_sums[0] + calorie_sums[1] + calorie_sums[2]);
-
 	while(last_elf != NULL)
 	{
 		struct Food *food_ptr = last_elf->food;
@@ -89,8 +86,13 @@ int main()
 		free(remove);
 	}
 
+	qsort(calorie_sums, elf_count, sizeof(long int), comparator_desc);
+	result[0] = calorie_sums[0];
+	result[1] = calorie_sums[1];
+	result[2] = calorie_sums[2];
+
 	fclose(fp);
 	free(line_buf);
 	line_buf = NULL;
-	return(EXIT_SUCCESS);
+	return(0);
 }

@@ -1,5 +1,4 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include "day2.h"
 
 typedef int hand;
 
@@ -11,7 +10,7 @@ const hand ROCK = 1;
 const hand PAPER = 2;
 const hand SCISSORS = 3;
 
-int calculate_win(hand us, hand them)
+int rps_calculate_win(hand us, hand them)
 {
 	if(them == us)
 		return POINTS_DRAW;
@@ -24,12 +23,12 @@ int calculate_win(hand us, hand them)
 	return POINTS_LOSS;
 }
 
-int calculate_score(hand us, hand them)
+int rps_calculate_score(hand us, hand them)
 {
-	return(us + calculate_win(us, them));
+	return(us + rps_calculate_win(us, them));
 }
 
-hand parse_hand(char c)
+hand rps_parse_hand(char c)
 {
 	switch(c)
 	{
@@ -48,24 +47,21 @@ hand parse_hand(char c)
 	}
 }
 
-int main()
+int day2(int *score)
 {
 	FILE *fp = fopen("inputs/day2.txt", "r");
 	if (fp == NULL)
-		return(EXIT_FAILURE);
+		return(-1);
 
-	int score = 0;
 	char line[5];
 	while(fgets(line, 5, fp) != NULL)
 	{
 		char us, them;
-		us = parse_hand(line[2]);
-		them = parse_hand(line[0]);
-		score += calculate_score(us, them);
+		us = rps_parse_hand(line[2]);
+		them = rps_parse_hand(line[0]);
+		*score += rps_calculate_score(us, them);
 	}
 
-	printf("Day 2-1: %d\n", score);
-
 	fclose(fp);
-	return(EXIT_SUCCESS);
+	return(0);
 }

@@ -1,13 +1,13 @@
-all: build/day1 build/day2
+SOURCES=$(shell find src -type f -name '*.c')
+OBJECTS=$(SOURCES:%.c=%.o)
 
-build:
-	@mkdir build
-
-build/day%: build/day%.o
+aoc: $(OBJECTS) src/main.o
 	$(CC) -o $@ $(CARGS) $^
 
-build/day%.o: src/day%.c build
+src/%.o: src/%.c
 	$(CC) -c $< -o $@ $(CARGS)
 
 clean:
-	$(RM) -fr build
+	$(RM) aoc $(OBJECTS)
+
+.PHONY: clean
