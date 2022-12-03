@@ -1,5 +1,5 @@
-#include "greatest/greatest.h"
 #include "day2.h"
+#include "greatest/greatest.h"
 
 TEST test_rps_calculate_win()
 {

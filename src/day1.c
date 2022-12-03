@@ -1,11 +1,13 @@
 #include "day1.h"
 
-struct Elf {
+struct Elf
+{
 	struct Elf *next;
 	struct Food *food;
 };
 
-struct Food {
+struct Food
+{
 	int calories;
 	struct Food *next;
 };
@@ -15,7 +17,7 @@ struct Food {
  */
 int comparator_desc(const void *a, const void *b)
 {
-	return *(long int*)b - *(long int*)a;
+	return *(long int *)b - *(long int *)a;
 }
 
 int day1(long int result[3])
@@ -29,9 +31,9 @@ int day1(long int result[3])
 
 	FILE *fp = fopen("inputs/day1.txt", "r");
 	if (fp == NULL)
-		return(-1);
+		return -1;
 
-	while(getline(&line_buf, &line_bufsize, fp) != -1)
+	while (getline(&line_buf, &line_bufsize, fp) != -1)
 	{
 		if (strlen(line_buf) == 1)
 		{
@@ -53,12 +55,12 @@ int day1(long int result[3])
 	long int calorie_sums[elf_count];
 	struct Elf *elf_ptr = last_elf;
 	int elf_i = 0;
-	while(elf_ptr != NULL)
+	while (elf_ptr != NULL)
 	{
 		long int sum = 0;
 
 		struct Food *food_ptr = elf_ptr->food;
-		while(food_ptr != NULL)
+		while (food_ptr != NULL)
 		{
 			sum += food_ptr->calories;
 			food_ptr = food_ptr->next;
@@ -69,11 +71,11 @@ int day1(long int result[3])
 		elf_ptr = elf_ptr->next;
 	}
 
-	while(last_elf != NULL)
+	while (last_elf != NULL)
 	{
 		struct Food *food_ptr = last_elf->food;
 
-		while(food_ptr != NULL)
+		while (food_ptr != NULL)
 		{
 			struct Food *remove = food_ptr;
 			food_ptr = food_ptr->next;
@@ -94,5 +96,5 @@ int day1(long int result[3])
 	fclose(fp);
 	free(line_buf);
 	line_buf = NULL;
-	return(0);
+	return 0;
 }

@@ -1,4 +1,5 @@
 CFLAGS+=-Wall -pedantic -std=c99 -Wextra
+CLANG_FORMAT?=clang-format
 
 SOURCES=$(shell find src -type f -name '*.c')
 OBJECTS=$(SOURCES:%.c=%.o)
@@ -10,7 +11,7 @@ aoc: $(OBJECTS) src/main.o
 	$(CC) -o $@ $(CARGS) $^
 
 test/aoc_test: $(TEST_OBJECTS) $(MAINLESS_OBJECTS)
-	$(CC) $(CFLAGS) -Isrc -o $@ $(TEST_OBJECTS) $(MAINLESS_OBJECTS)
+	$(CC) $(CFLAGS) -Isrc -o $@ $^
 
 test: test/aoc_test
 	@./test/aoc_test
@@ -18,7 +19,13 @@ test: test/aoc_test
 %.o: %.c
 	$(CC) $(CFLAGS) -I src -c -o $@ $<
 
+check-format: $(SOURCES) $(TEST_SOURCES)
+	$(CLANG_FORMAT) --Werror -n $^
+
+format: $(SOURCES) $(TEST_SOURCES)
+	$(CLANG_FORMAT) -i $^
+
 clean:
 	$(RM) aoc test/aoc_test $(OBJECTS) $(TEST_OBJECTS)
 
-.PHONY: clean test
+.PHONY: clean format test
