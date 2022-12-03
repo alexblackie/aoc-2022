@@ -12,4 +12,5 @@
 typedef int hand;
 
 int rps_calculate_win(hand us, hand them);
+hand rps_parse_hand(char c);
 int day2(int *result);

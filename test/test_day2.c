@@ -28,10 +28,19 @@ TEST test_rps_calculate_win()
 	PASS();
 }
 
+TEST test_rps_parse_hand()
+{
+	ASSERT_EQ(ROCK, rps_parse_hand('A'));
+	ASSERT_EQ(PAPER, rps_parse_hand('B'));
+	ASSERT_EQ(SCISSORS, rps_parse_hand('C'));
+	PASS();
+}
+
 SUITE(day2_suite)
 {
 	/* SET_SETUP(setup, NULL); */
 	/* SET_TEARDOWN(teardown, NULL); */
 
 	RUN_TEST(test_rps_calculate_win);
+	RUN_TEST(test_rps_parse_hand);
 }
