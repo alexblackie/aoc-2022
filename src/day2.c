@@ -1,15 +1,5 @@
 #include "day2.h"
 
-typedef int hand;
-
-const int POINTS_WIN = 6;
-const int POINTS_DRAW = 3;
-const int POINTS_LOSS = 0;
-
-const hand ROCK = 1;
-const hand PAPER = 2;
-const hand SCISSORS = 3;
-
 int rps_calculate_win(hand us, hand them)
 {
 	if(them == us)

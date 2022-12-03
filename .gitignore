@@ -1,3 +1,4 @@
 # Ignore build artefacts
-src/*.o
+*.o
 /aoc
+/test/aoc_test
