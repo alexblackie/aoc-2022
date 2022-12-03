@@ -18,7 +18,7 @@ int comparator_desc(const void *a, const void *b)
 	return *(long int*)b - *(long int*)a;
 }
 
-int day1(long int result[])
+int day1(long int result[3])
 {
 	char *line_buf = NULL;
 	size_t line_bufsize = 0;

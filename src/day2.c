@@ -35,6 +35,7 @@ hand rps_parse_hand(char c)
 			return SCISSORS;
 			break;
 	}
+	return 0;
 }
 
 int day2(int *score)
@@ -49,6 +50,8 @@ int day2(int *score)
 		char us, them;
 		us = rps_parse_hand(line[2]);
 		them = rps_parse_hand(line[0]);
+		if (us == 0 || them == 0)
+			return(-1);
 		*score += rps_calculate_score(us, them);
 	}
 
