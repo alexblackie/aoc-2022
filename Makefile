@@ -1,3 +1,5 @@
+CFLAGS+=$(-Wall -pendantic -std=c99)
+
 SOURCES=$(shell find src -type f -name '*.c')
 OBJECTS=$(SOURCES:%.c=%.o)
 MAINLESS_OBJECTS=$(filter-out src/main.o,$(OBJECTS))
