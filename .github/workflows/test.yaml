@@ -17,5 +17,11 @@ jobs:
     - name: Compile
       run: make
 
+    - name: Install valgrind
+      run: sudo apt-get install -y valgrind
+
+    - name: Check for leaks
+      run: valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./aoc
+
     - name: Run tests
       run: make test
