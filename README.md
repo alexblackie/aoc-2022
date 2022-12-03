@@ -2,23 +2,34 @@
 
 This repository contains my personal solutions for the [Advent of Code for 2022][aoc].
 
+[aoc]: https://adventofcode.com/2022
+
 ## Running
 
 This year I decided to use C, so all the solutions here are written in GNU-ish
 C, with a simple Makefile to get everything compiled.
 
-To compile everything, just run:
+To compile the program, just run:
 
 ```
 $ make
 ```
 
-and you'll get a `./build` directory full of executables.
+... and you'll get a binary in the root directory named `aoc`. Run this to run
+all days' solutions.
 
-If you want to build just a specific day's solution, you can specify:
+## Testing
+
+There is a unit test suite as well.
+
+First, ensure you have cloned all submodules as we pull in an external library:
 
 ```
-$ make build/day2
+git submodule update --init
 ```
 
-[aoc]: https://adventofcode.com/2022
+Then you can compile and run the test suite:
+
+```
+$ make test
+```
