@@ -15,11 +15,13 @@ TEST test_ruck_priority()
 
 TEST test_ruck_partition()
 {
-	char left[12], right[12];
+	char left[255], right[255];
 	char *str = "vJrwpWtwJgWrhcsFMMfFFhFp";
+
 	ruck_partition(str, left, right);
-	ASSERT_STR_EQ(left, "vJrwpWtwJgWr");
-	ASSERT_STR_EQ(right, "hcsFMMfFFhFp");
+
+	ASSERT_STR_EQ("vJrwpWtwJgWr", left);
+	ASSERT_STR_EQ("hcsFMMfFFhFp", right);
 	PASS();
 }
 
