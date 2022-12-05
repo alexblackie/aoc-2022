@@ -35,16 +35,8 @@ TEST test_ruck_score()
 
 TEST test_ruck_find_badges()
 {
-	char *input[] = {
-		"vJrwpWtwJgWrhcsFMMfFFhFp",
-		"jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL",
-		"PmmdzqPrVvPwwTWBwg"
-	};
-	char *input2[] = {
-		"wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn",
-		"ttgJtRGJQctTZtZT",
-		"CrZsJsPPZsGzwwsLwLmpwMDw"
-	};
+	char *input[] = {"vJrwpWtwJgWrhcsFMMfFFhFp", "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL", "PmmdzqPrVvPwwTWBwg"};
+	char *input2[] = {"wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn", "ttgJtRGJQctTZtZT", "CrZsJsPPZsGzwwsLwLmpwMDw"};
 
 	ASSERT_EQ('r', ruck_find_badges(input));
 	ASSERT_EQ('Z', ruck_find_badges(input2));
