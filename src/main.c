@@ -30,7 +30,9 @@ int main()
 	 * Day 3
 	 */
 	int day3_result = 0;
-	if (day3(&day3_result) == -1)
+	int day3_result2 = 0;
+	if (day3(&day3_result, &day3_result2) == -1)
 		return EXIT_FAILURE;
 	printf("Day 3-1: %d\n", day3_result);
+	printf("Day 3-2: %d\n", day3_result2);
 }

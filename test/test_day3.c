@@ -33,9 +33,28 @@ TEST test_ruck_score()
 	PASS();
 }
 
+TEST test_ruck_find_badges()
+{
+	char *input[] = {
+		"vJrwpWtwJgWrhcsFMMfFFhFp",
+		"jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL",
+		"PmmdzqPrVvPwwTWBwg"
+	};
+	char *input2[] = {
+		"wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn",
+		"ttgJtRGJQctTZtZT",
+		"CrZsJsPPZsGzwwsLwLmpwMDw"
+	};
+
+	ASSERT_EQ('r', ruck_find_badges(input));
+	ASSERT_EQ('Z', ruck_find_badges(input2));
+	PASS();
+}
+
 SUITE(day3_suite)
 {
 	RUN_TEST(test_ruck_priority);
 	RUN_TEST(test_ruck_partition);
 	RUN_TEST(test_ruck_score);
+	RUN_TEST(test_ruck_find_badges);
 }

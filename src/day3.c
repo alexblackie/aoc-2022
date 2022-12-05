@@ -48,12 +48,29 @@ int ruck_score(char left[], char right[])
 	return 0;
 }
 
-int day3(int *result)
+/**
+ * Finds the common item in all strings in the three-elf group.
+ */
+char ruck_find_badges(char *group[3])
+{
+	for (size_t i = 0; i < strlen(group[0]); i++)
+	{
+		char *match_one = strchr(group[1], group[0][i]);
+		char *match_two = strchr(group[2], group[0][i]);
+		if (match_one != NULL && match_two != NULL)
+			return group[0][i];
+	}
+	return 0;
+}
+
+int day3(int *result, int *badges)
 {
 	FILE *fp = fopen("inputs/day3.txt", "r");
 	if (fp == NULL)
 		return -1;
 
+	char *elf_group[3];
+	int elf_group_cursor = 0;
 	char *line_buf = NULL;
 	size_t line_bufsize = 0;
 	while (getline(&line_buf, &line_bufsize, fp) != -1)
@@ -61,6 +78,27 @@ int day3(int *result)
 		char left[255], right[255];
 		ruck_partition(line_buf, left, right);
 		*result += ruck_score(left, right);
+
+		/* Part two */
+
+		elf_group[elf_group_cursor] = strdup(line_buf);
+		if (elf_group_cursor == 2)
+		{
+			char badge = ruck_find_badges(elf_group);
+			*badges += ruck_priority(badge);
+
+			for (int i = 0; i < 3; i++)
+			{
+				free(elf_group[i]);
+				elf_group[i] = NULL;
+			}
+
+			elf_group_cursor = 0;
+		}
+		else
+		{
+			elf_group_cursor++;
+		}
 	}
 
 	fclose(fp);
