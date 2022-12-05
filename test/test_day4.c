@@ -57,9 +57,60 @@ TEST test_cleaning_overlap()
 	PASS();
 }
 
+TEST test_cleaning_any_overlap()
+{
+	CleaningElf *elf1 = malloc(sizeof(CleaningElf));
+	CleaningElf *elf2 = malloc(sizeof(CleaningElf));
+
+	/* 3 - 7 fits within 2 - 8 */
+	elf1->start = 2;
+	elf1->end = 8;
+	elf2->start = 3;
+	elf2->end = 7;
+	ASSERT(cleaning_any_overlap(elf1, elf2));
+
+	/* 7 - 9 overlaps with 5 - 7 */
+	elf1->start = 7;
+	elf1->end = 9;
+	elf2->start = 5;
+	elf2->end = 7;
+	ASSERT(cleaning_any_overlap(elf1, elf2));
+
+	/* 6 - 6 overlaps with 4 - 6 */
+	elf1->start = 6;
+	elf1->end = 6;
+	elf2->start = 4;
+	elf2->end = 6;
+	ASSERT(cleaning_any_overlap(elf1, elf2));
+
+	/* 2 - 6 overlaps with 4 - 8 */
+	elf1->start = 2;
+	elf1->end = 6;
+	elf2->start = 4;
+	elf2->end = 8;
+	ASSERT(cleaning_any_overlap(elf1, elf2));
+	/* Test that elf1 trailing elf2 also works*/
+	ASSERT(cleaning_any_overlap(elf2, elf1));
+
+	/* 1 - 2 does not fit within 3 - 4 */
+	elf1->start = 1;
+	elf1->end = 2;
+	elf2->start = 3;
+	elf2->end = 4;
+	ASSERT_FALSE(cleaning_any_overlap(elf1, elf2));
+	/* Test that elf1 trailing elf2 also works*/
+	ASSERT_FALSE(cleaning_any_overlap(elf2, elf1));
+
+	free(elf1);
+	free(elf2);
+
+	PASS();
+}
+
 SUITE(day4_suite)
 {
 	RUN_TEST(test_cleaning_parse_elves);
 	RUN_TEST(test_cleaning_parse_range);
 	RUN_TEST(test_cleaning_overlap);
+	RUN_TEST(test_cleaning_any_overlap);
 }

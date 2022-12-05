@@ -1,8 +1,8 @@
 #include <day4.h>
 
 /**
- * Finds any overlap in the ranges for the two given elves. Overlap exists if
- * this returns true.
+ * Finds complete range overlap in the ranges for the two given elves. Overlap
+ * exists if this returns true.
  */
 bool cleaning_overlap(CleaningElf *elf1, CleaningElf *elf2)
 {
@@ -11,6 +11,16 @@ bool cleaning_overlap(CleaningElf *elf1, CleaningElf *elf2)
 		((elf1->start >= elf2->start) && (elf1->end <= elf2->end)) ||
 		/* OR does elf2's range fit within elf1? */
 		((elf2->start >= elf1->start) && (elf2->end <= elf1->end)));
+}
+
+/**
+ * Finds *any* overlap in the ranges for the two given elves. Overlap exists if
+ * this returns true.
+ */
+bool cleaning_any_overlap(CleaningElf *elf1, CleaningElf *elf2)
+{
+	return (((elf2->start >= elf1->start) && (elf2->start <= elf1->end)) ||
+			((elf1->start >= elf2->start) && (elf1->start <= elf2->end)));
 }
 
 /**
@@ -63,7 +73,7 @@ void cleaning_parse_elves(char *src, CleaningElf *elf1, CleaningElf *elf2)
 	free(line);
 }
 
-int day4(int *count)
+int day4(int *count, int *all_count)
 {
 	FILE *fp = fopen("inputs/day4.txt", "r");
 	if (fp == NULL)
@@ -80,6 +90,9 @@ int day4(int *count)
 
 		if (cleaning_overlap(elf1, elf2))
 			*count += 1;
+
+		if (cleaning_any_overlap(elf1, elf2))
+			*all_count += 1;
 
 		free(elf1);
 		free(elf2);
