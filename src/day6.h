@@ -3,5 +3,5 @@
 #include<stdlib.h>
 #include<stdbool.h>
 
-bool day6_unique(char buffer[4]);
-int day6(int *result);
+bool day6_unique(char buffer[], int size);
+int day6(int *result, int window);

@@ -64,7 +64,10 @@ int main()
 	 * Day 6
 	 */
 	int day6_result = 0;
-	if (day6(&day6_result) == -1)
+	if (day6(&day6_result, 4) == -1)
 		return EXIT_FAILURE;
 	printf("Day 6-1: %d\n", day6_result);
+	if (day6(&day6_result, 14) == -1)
+		return EXIT_FAILURE;
+	printf("Day 6-2: %d\n", day6_result);
 }
