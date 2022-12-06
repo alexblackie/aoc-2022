@@ -1,4 +1,4 @@
-#include "day4.h"
+#include "../src/day4.h"
 #include "greatest/greatest.h"
 
 TEST test_cleaning_parse_range()

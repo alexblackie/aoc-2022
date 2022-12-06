@@ -1,4 +1,4 @@
-#include "day2.h"
+#include "../src/day2.h"
 #include "greatest/greatest.h"
 
 TEST test_rps_outcomes()

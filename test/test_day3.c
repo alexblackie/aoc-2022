@@ -1,4 +1,4 @@
-#include "day3.h"
+#include "../src/day3.h"
 #include "greatest/greatest.h"
 
 TEST test_ruck_priority()

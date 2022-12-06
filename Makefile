@@ -11,13 +11,13 @@ aoc: $(OBJECTS) src/main.o
 	$(CC) -o $@ $(CARGS) $^
 
 test/aoc_test: $(TEST_OBJECTS) $(MAINLESS_OBJECTS)
-	$(CC) $(CFLAGS) -Isrc -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^
 
 test: test/aoc_test
 	@./test/aoc_test
 
 %.o: %.c
-	$(CC) $(CFLAGS) -I src -c -o $@ $<
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 check-format: $(SOURCES) $(TEST_SOURCES)
 	$(CLANG_FORMAT) --Werror -n $^
