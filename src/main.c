@@ -52,7 +52,10 @@ int main()
 	 * Day 5
 	 */
 	char day5_result[10] = "         ";
-	if (day5(day5_result) == -1)
+	if (day5(day5_result, false) == -1)
 		return EXIT_FAILURE;
 	printf("Day 5-1: %s\n", day5_result);
+	if (day5(day5_result, true) == -1)
+		return EXIT_FAILURE;
+	printf("Day 5-2: %s\n", day5_result);
 }

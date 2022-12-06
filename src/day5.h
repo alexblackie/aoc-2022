@@ -2,6 +2,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<stdbool.h>
 
 typedef struct Crate
 {
@@ -17,4 +18,4 @@ typedef struct CrateMovement
 } CrateMovement;
 
 CrateMovement* crates_parse_move(char *src);
-int day5(char result[9]);
+int day5(char result[9], bool ordered);

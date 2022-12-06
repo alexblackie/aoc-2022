@@ -79,10 +79,25 @@ void crates_move(Crate *crates[], CrateMovement *move)
 }
 
 /**
+ * Apply the given `CrateMovement` to the given crate stacks, retaining the
+ * original order of the `n` crates from the source stack.
+ */
+void crates_ordered_move(Crate *crates[], CrateMovement *move)
+{
+	Crate *popped = crates[move->src];
+	Crate *tail = popped;
+	for (int count = 0; count < move->quantity - 1; count++)
+		tail = tail->next;
+	crates[move->src] = tail->next;
+	tail->next = crates[move->dest];
+	crates[move->dest] = popped;
+}
+
+/**
  * Loops over the given file and parses each `move` instruction before
  * then executing it.
  */
-void crates_execute_moves(FILE *fp, Crate *crates[])
+void crates_execute_moves(FILE *fp, Crate *crates[], bool ordered)
 {
 	char *line_buf = NULL;
 	size_t line_bufsize = 0;
@@ -92,7 +107,11 @@ void crates_execute_moves(FILE *fp, Crate *crates[])
 			continue;
 
 		CrateMovement *move = crates_parse_move(line_buf);
-		crates_move(crates, move);
+		if (ordered)
+			crates_ordered_move(crates, move);
+		else
+			crates_move(crates, move);
+
 		free(move);
 	}
 	free(line_buf);
@@ -116,7 +135,7 @@ void crates_debug_stacks(Crate *crates[9])
 	}
 }
 
-int day5(char result[9])
+int day5(char result[9], bool ordered)
 {
 	FILE *fp = fopen("inputs/day5.txt", "r");
 	if (fp == NULL)
@@ -125,7 +144,10 @@ int day5(char result[9])
 	Crate *crates[9] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
 
 	crates_parse_stacks(fp, crates);
-	crates_execute_moves(fp, crates);
+
+	crates_execute_moves(fp, crates, ordered);
+	for (int i = 0; i < 9; i++)
+		result[i] = crates[i]->name;
 
 	/* crates_debug_stacks(crates); */
 
@@ -133,7 +155,6 @@ int day5(char result[9])
 	{
 		Crate *cr, *tmp;
 		cr = tmp = crates[i];
-		result[i] = cr->name;
 		while (cr)
 		{
 			tmp = cr->next;
