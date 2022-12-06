@@ -121,17 +121,32 @@ void crates_execute_moves(FILE *fp, Crate *crates[], bool ordered)
  * Iterate through all the crate hierarchies and print a visual representation
  * for visual debugging.
  */
-void crates_debug_stacks(Crate *crates[9])
+void crates_debug_stacks(Crate *crates[], size_t size)
 {
-	for (int i = 0; i < 9; i++)
+	for (size_t i = 0; i < size; i++)
 	{
 		Crate *cr = crates[i];
 		while (cr)
 		{
-			printf("[%d %c] ", i, cr->name);
+			printf("[%ld %c] ", i, cr->name);
 			cr = cr->next;
 		}
 		printf("\n");
+	}
+}
+
+void crates_free(Crate *crates[], size_t size)
+{
+	for (size_t i = 0; i < size; i++)
+	{
+		Crate *cr, *tmp;
+		cr = tmp = crates[i];
+		while (cr)
+		{
+			tmp = cr->next;
+			free(cr);
+			cr = tmp;
+		}
 	}
 }
 
@@ -149,19 +164,9 @@ int day5(char result[9], bool ordered)
 	for (int i = 0; i < 9; i++)
 		result[i] = crates[i]->name;
 
-	/* crates_debug_stacks(crates); */
+	/* crates_debug_stacks(crates, 9); */
 
-	for (int i = 0; i < 9; i++)
-	{
-		Crate *cr, *tmp;
-		cr = tmp = crates[i];
-		while (cr)
-		{
-			tmp = cr->next;
-			free(cr);
-			cr = tmp;
-		}
-	}
+	crates_free(crates, 9);
 
 	fclose(fp);
 	return 0;
