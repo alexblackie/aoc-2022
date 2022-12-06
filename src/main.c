@@ -6,6 +6,7 @@
 #include "day3.h"
 #include "day4.h"
 #include "day5.h"
+#include "day6.h"
 
 int main()
 {
@@ -58,4 +59,12 @@ int main()
 	if (day5(day5_result, true) == -1)
 		return EXIT_FAILURE;
 	printf("Day 5-2: %s\n", day5_result);
+
+	/**
+	 * Day 6
+	 */
+	int day6_result = 0;
+	if (day6(&day6_result) == -1)
+		return EXIT_FAILURE;
+	printf("Day 6-1: %d\n", day6_result);
 }
